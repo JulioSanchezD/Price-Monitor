@@ -21,4 +21,4 @@ while (r := requests.get(url=url.format(n_page))).status_code == 200:
             df.loc[n_book, "Instock Availability"] = book.find("p", {"class": "instock availability"}).text.strip()
             n_book += 1
 
-df.to_csv("Scrapping Excercises/books/books_julio.csv", index=False)
+df.to_csv("Scrapping Exercises/books/books_julio.csv", index=False)
