@@ -31,7 +31,7 @@ class WalMart:
     scroll_pause_time: float = 1.5
     url: str = "https://super.walmart.com.mx"
 
-    def __init__(self, browser="Firefox", executable_path="", headless=False, zip_code="45643"):
+    def __init__(self, browser="Firefox", executable_path=None, headless=False, zip_code="45643"):
         self.browser = browser
         self.executable_path = executable_path
         self.headless = headless
@@ -39,9 +39,15 @@ class WalMart:
 
     def __enter__(self):
         if self.browser == "Firefox":
-            self.driver = webdriver.Firefox(executable_path=self.executable_path, service_log_path=os.path.devnull, firefox_options=get_firefox_options(self.headless))
+            if not self.executable_path:
+                self.driver = webdriver.Firefox(service_log_path=os.path.devnull, firefox_options=get_firefox_options(self.headless))
+            else:
+                self.driver = webdriver.Firefox(executable_path=self.executable_path, service_log_path=os.path.devnull, firefox_options=get_firefox_options(self.headless))
         elif self.browser == "Chrome":
-            self.driver = webdriver.Chrome(executable_path=self.executable_path, chrome_options=get_chrome_options(self.headless))
+            if not self.executable_path:
+                self.driver = webdriver.Chrome(chrome_options=get_chrome_options(self.headless))
+            else:
+                self.driver = webdriver.Chrome(executable_path=self.executable_path, chrome_options=get_chrome_options(self.headless))
         else:
             raise Exception("Invalid Browser")
 
