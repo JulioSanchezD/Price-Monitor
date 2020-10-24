@@ -9,6 +9,8 @@ with walmart:
         scrap_result = walmart.scrap_by_category("cereal")
     except Exception as e:
         telegram_bot_sendtext(f"Cereal walmart robot crashed, error: {str(e)}")
+    else:
+        telegram_bot_sendtext(f"Finished walmart scrapping succesfully")
 
 # Transform extracted data into DataFrame
 df = pd.DataFrame({"scrap_date_time": scrap_result[0], "product_name": scrap_result[1], "product_prices": scrap_result[2]})
