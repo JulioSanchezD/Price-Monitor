@@ -1,12 +1,17 @@
 import requests
+import json
 
-# Telegram parameters
-bot_token = "1224634380:AAHZew1V_SLed0sxBxvYSUvHBD2iYz7mdo4"
-bot_chatID = "1207170474"
+
+with open("telegram_parameters.json") as f:
+    telegram_params = json.load(f)
 
 
 def telegram_bot_sendtext(message):
-    send_text = 'https://api.telegram.org/bot' + bot_token + '/' \
-                'sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + message
+    send_text = 'https://api.telegram.org/bot' + telegram_params["bot_token"] + '/' \
+                'sendMessage?chat_id=' + telegram_params["bot_chatID"] + '&parse_mode=Markdown&text=' + message
     response = requests.get(send_text)
     return response.json()
+
+
+if __name__ == "__main__":
+    telegram_bot_sendtext("hola julio esto es una prueba")

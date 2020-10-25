@@ -3,3 +3,4 @@ venv
 .idea
 prices.db
 *.pyc
+telegram_parameters.json
