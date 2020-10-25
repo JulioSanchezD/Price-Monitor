@@ -1,8 +1,9 @@
 import requests
 import json
+import os
 
 
-with open("telegram_parameters.json") as f:
+with open(f"{os.path.realpath(__file__).strip('utils.py')}telegram_parameters.json") as f:
     telegram_params = json.load(f)
 
 
