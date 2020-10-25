@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
-from typing import Tuple
 from tqdm import tqdm
 import datetime as dt
 import os
@@ -28,8 +27,8 @@ def get_firefox_options(headless=False):
 
 
 class WalMart:
-    scroll_pause_time: float = 1.5
-    url: str = "https://super.walmart.com.mx"
+    scroll_pause_time = 1.5
+    url = "https://super.walmart.com.mx"
 
     def __init__(self, browser="Firefox", executable_path=None, headless=False, zip_code="45643"):
         self.browser = browser
@@ -62,7 +61,7 @@ class WalMart:
         # Close modal
         self.driver.find_element_by_xpath('//button[@data-automation-id="modalCloseButton"]').click()
 
-    def scrap_by_category(self, category: str) -> Tuple[list, list, list]:
+    def scrap_by_category(self, category):
         self.driver.get(f"{WalMart.url}/productos?Ntt={category}")
         self.enter_zipcode()
         # Wait until prices appears
@@ -71,13 +70,13 @@ class WalMart:
         # Get total products and scrollable table where the products are
         total_products = int(self.driver.find_element_by_xpath('//span[@data-automation-id="productTotal"]').text)
         scrollable_div = self.driver.find_element_by_xpath('//div[@id="scrollToTopComponent"]')
-        i: int = 0
+        i = 0
         p_bar = tqdm(total=total_products)
 
         # Initialize lists
-        product_names: list = []
-        product_prices: list = []
-        scrap_date_times: list = []
+        product_names = []
+        product_prices = []
+        scrap_date_times = []
 
         # Loop through products
         while i <= total_products:
@@ -93,8 +92,8 @@ class WalMart:
                 # Wait until prices appears
                 sleep(WalMart.scroll_pause_time)
             else:
-                product_name: str = product.find_element_by_xpath('.//p[@data-testid="product-name"]').text
-                product_price: str = product.find_element_by_xpath('.//p[@data-testid="price"]').text
+                product_name = product.find_element_by_xpath('.//p[@data-testid="product-name"]').text
+                product_price = product.find_element_by_xpath('.//p[@data-testid="price"]').text
                 if category.lower() in product_name.lower():
                     product_names.append(product_name)
                     product_prices.append(product_price)

@@ -1,8 +1,8 @@
 import requests
 
 # Telegram parameters
-bot_token: str = "1224634380:AAHZew1V_SLed0sxBxvYSUvHBD2iYz7mdo4"
-bot_chatID: str = "1207170474"
+bot_token = "1224634380:AAHZew1V_SLed0sxBxvYSUvHBD2iYz7mdo4"
+bot_chatID = "1207170474"
 
 
 def telegram_bot_sendtext(message):
