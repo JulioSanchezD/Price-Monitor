@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import sqlite3
 
-walmart = WalMart(executable_path=r'C:\Program Files\Mozilla Firefox\geckodriver.exe', zip_code="45643")
+walmart = WalMart(browser='Chrome', zip_code="45643")
 with walmart:
     try:
         scrap_result = walmart.scrap_by_category("cereal")
