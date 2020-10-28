@@ -9,7 +9,7 @@ book_info = pd.DataFrame(columns = ['Book', 'Price', 'Rating', 'Availability'])
 url = "http://books.toscrape.com/catalogue/page-{}.html"
 # Contador de paginas
 num_page = 1
-# Se ahce el request con el url
+# Se hace el request con el url
 book_page = requests.get(url.format(num_page))
 # Mientras la conexión sea exitosa
 while book_page.status_code == 200:
